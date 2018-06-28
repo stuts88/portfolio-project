@@ -4,5 +4,14 @@ from django.db import models
 class Blog(models.Model):
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images/')
-    data = models.DateField(auto_now=True)
-    content = models.CharField(max_length=1000)
+    content = models.TextField()
+    pub_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.title
+
+    def summary(self):
+        return self.content[:100]
+
+    def pub_date_nice(self):
+        return self.pub_date.strftime('%A, %e %b %Y')
